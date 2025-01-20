@@ -1,0 +1,52 @@
+void insert(stack<int> &s, int temp)
+{
+	// base condition
+	if (s.size() == 0)
+	{
+		s.push(temp);
+		return;
+	}
+	// hypothesis
+	int x = s.top();
+	s.pop();
+	insert(s, temp);
+	// induction
+	s.push(x);
+}
+
+void rev(stack<int>&v)
+{
+	if (v.size() == 1) return;
+
+	// hypothesis
+	int temp = v.top();
+	v.pop();
+	rev(v);
+	// induction
+	insert(v, temp);
+
+}
+
+void print(stack<int>v)
+{
+	if (v.empty()) return;
+	int x = v.top();
+	v.pop();
+	print(v);
+	cout << x << " ";
+}
+
+void solve() {
+	int n;
+	cin >> n;
+	stack<int>v;
+
+	for (int i = 0; i < n; i++)
+	{
+		int x;
+		cin >> x;
+		v.push(x);
+	}
+	rev(v);
+	print(v);
+}
