@@ -1,0 +1,17 @@
+void sol(int n) {
+	// base caase
+	if (n == 1) {
+		cout << n << " ";
+		return;
+	}
+
+	cout << n << " "; // induction
+	sol(n - 1); // hypothesis
+
+}
+
+void solve() {
+	int n;
+	cin >> n;
+	sol(n);
+}
