@@ -1,0 +1,10 @@
+int facto(int n)
+{
+	if (n == 1)return 1; // base case
+	return n * facto(n - 1); // hypothesis + induction
+}
+void solve() {
+	int n;
+	cin >> n;
+	cout << facto(n);
+}
