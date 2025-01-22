@@ -1,0 +1,20 @@
+void toh(int s, int d, int h, int n) {
+    if (n == 1) {
+        cout << s << " " << d << Endl;
+        return;
+    }
+    // hypothesis
+    toh(s, h, d, n - 1);
+    cout << s << " " << d << Endl;
+    toh(h, d, s, n - 1);
+}
+
+void solve() {
+    int n;
+    cin >> n;
+    int s = 1;
+    int h = 2;
+    int d = 3;
+    
+    toh(n, s, h, d);
+}
