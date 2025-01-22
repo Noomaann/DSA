@@ -1,0 +1,28 @@
+void subset(vector<int> input, vector<int> output) {
+    if (input.empty()) {
+        
+        for (int it : output) {
+            cout << it << " ";
+        }
+        cout << Endl;
+        return;
+    }
+
+    int first = input[0];
+    input.erase(input.begin());
+
+    subset(input, output);
+
+    output.push_back(first);
+    subset(input, output);
+}
+
+void solve() {
+    int n;
+    cin >> n;
+    vi input(n);
+    forin(input, n)
+
+    vi output;
+    subset(input, output);
+}
