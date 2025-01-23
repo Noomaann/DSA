@@ -1,34 +1,41 @@
-void inserts(vector<int>&v, int temp)
-{
-	// base case
-	if (v.size() == 0 || v[v.size() - 1] <= temp)
-	{
-		v.push_back(temp);
-		return;
-	}
-	int val = v[v.size() - 1]; // induction
-	v.pop_back(); // induction
-	inserts(v, temp); // hypothesis 
-	v.push_back(val); // induction
+void insert(int temp, vector<int>&v) {
+    // base case
+    if (v.size() == 0 || v[v.size() - 1] <= temp) {
+        v.pb(temp);
+        return;
+    }
+
+    // hypothesis
+    int val = v[v.size() - 1];
+    v.pop_back();
+    insert(temp, v);
+
+    // induction
+    v.pb(val);
 }
 
-void sort(vector<int>&v)
-{
-	if (v.size() == 1) return; // base case
+void sol(vector<int>&v) {
 
-	int temp = v[v.size() - 1]; // induction
-	v.pop_back(); // induction
-	sort(v); // hypothesis
-	inserts(v, temp); // induction
+    // base case
+    if (v.size() == 1) {
+        return;
+    }
+
+    // hypothesis
+    int temp = v[v.size() - 1];
+    v.pop_back();
+    sol(v);
+
+    //induction
+    insert(temp, v);
+
 }
-
 void solve() {
-	int n;
-	cin >> n;
-	vi v(n);
-	forin(v, n)
+    int n;
+    cin >> n;
+    vi v(n);
+    forin(v, n)
+    sol(v);
 
-	sort(v);
-
-	for (auto it : v) cout << it << " ";
+    for (auto it : v) cout << it << " ";
 }
