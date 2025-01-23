@@ -1,0 +1,24 @@
+
+void subset(string ip,string op,map<string,int> &m)
+{
+    if(ip.size()==0){
+        m[op]++;
+        if(m[op]==1)
+        cout<<op<<"\n";
+        return;
+    }
+    string op1=op;
+    string op2=op;
+    op2.push_back(ip[0]);
+    ip.erase(ip.begin()+0);
+    subset(ip,op1,m);
+    subset(ip,op2,m);
+}
+
+void solve() {
+    string ip;
+    cin>>ip;
+    string op=" ";
+    map<string,int> m;
+    subset(ip,op,m);
+}
