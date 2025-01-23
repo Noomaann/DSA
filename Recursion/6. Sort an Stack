@@ -1,46 +1,55 @@
-void inserts(stack<int>&v, int temp)
-{
-	// base case
-	if (v.size() == 0 || v.top() <= temp)
-	{
-		v.push(temp);
-		return;
-	}
-	int val = v.top(); // induction
-	v.pop(); // induction
-	inserts(v, temp); // hypothesis
-	v.push(val); // induction
+void insert(int temp, stack<int>& s) {
+    // base case
+    if (s.size() == 0 || s.top() <= temp) {
+        s.push(temp);
+        return;
+    }
+
+    // hypothesis
+    int val = s.top();
+    s.pop();
+    insert(temp, s);
+
+    // induction
+    s.push(val);
+
 }
+void sol(stack<int>& s) {
+    // base case
+    if (s.size() == 1) return;
+    
+    // hypothesis
+    int temp = s.top();
+    s.pop();
+    sol(s);
 
-void sort(stack<int>&v)
-{
-	if (v.size() == 1) return; // base case
-
-	int temp = v.top(); // induction
-	v.pop(); // induction
-	sort(v); // hypothesis
-	inserts(v, temp); // induction
+    // induction
+    insert(temp, s);
 }
+void print(stack<int>& s) {
+    // base case
+    if (s.size() == 1) {
+        cout << 1 << " ";
+        return;
+    }
 
-void print(stack<int>v)
-{
-	if (v.empty()) return;
-	int x = v.top();
-	v.pop();
-	print(v);
-	cout << x << " ";
+    // hypothesis
+    int a = s.top();
+    s.pop();
+    print(s);
+
+    // induction
+    cout << a << " ";
 }
-
 void solve() {
-	int n;
-	cin >> n;
-	stack<int>v;
-	int x;
-	for (int i = 0; i < n; i++)
-	{
-		cin >> x;
-		v.push(x);
-	}
-	sort(v);
-	print(v);
+    int n;
+    cin >> n;
+    stack<int> s;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        s.push(x);
+    }
+    sol(s);
+    print(s);
 }
