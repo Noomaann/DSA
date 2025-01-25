@@ -1,0 +1,35 @@
+void sol(string input, string output) {
+    if (input.empty()) {
+        cout << output << endl;
+        return;
+    }
+
+    string output1 = output; // Including a space
+    string output2 = output; // Without a space
+
+    // Append space and the next character to `output1`
+    output1 += "_";
+    output1 += input[0];
+
+    // Append only the next character to `output2`
+    output2 += input[0];
+
+    // Remove the first character from `input` using erase
+    input.erase(0, 1);
+
+    // Recursive calls
+    sol(input, output1);
+    sol(input, output2);
+}
+void solve() {
+    string input;
+    cin >> input;
+    string output = "";
+
+    // Initialize `output` with the first character of `input`
+    output += input[0];
+    input.erase(0, 1); // Remove the first character from `input`
+
+    // Start the recursive function
+    sol(input, output);
+}
