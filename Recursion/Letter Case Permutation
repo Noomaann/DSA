@@ -1,0 +1,43 @@
+void permutationFind(string inputs, string output) {
+    if (inputs.empty()) {
+        cout << output << endl;
+        return;
+    }
+
+    // Check if the first character is an alphabet
+    if (isalpha(inputs[0])) {
+        string out1 = output; // Output with lowercase
+        string out2 = output; // Output with uppercase
+
+        // Add the lowercase version to out1
+        out1 += tolower(inputs[0]);
+
+        // Add the uppercase version to out2
+        out2 += toupper(inputs[0]);
+
+        // Remove the first character from inputs
+        inputs.erase(0, 1);
+
+        // Recursive calls for both cases
+        permutationFind(inputs, out1);
+        permutationFind(inputs, out2);
+    } else {
+        string out1 = output;
+
+        // Add the digit or non-alphabet character to out1
+        out1 += inputs[0];
+
+        // Remove the first character from inputs
+        inputs.erase(0, 1);
+
+        // Recursive call
+        permutationFind(inputs, out1);
+    }
+}
+void solve() {
+    string input;
+    cin >> input;
+    string output = "";
+
+    permutationFind(input, output);
+}
