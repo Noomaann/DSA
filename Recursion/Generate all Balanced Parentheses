@@ -1,0 +1,29 @@
+void sol(int open, int close, string output, vector<string>& v) {
+    if (open == 0 && close == 0) {
+        v.push_back(output);
+        return;
+    }
+    if (open != 0) {
+        string output1 = output;
+        output1.push_back('(');
+        sol(open - 1, close, output1, v);
+    }
+    if (close > open) {
+        string output2 = output;
+        output2.push_back(')');
+        sol(open, close - 1, output2, v);
+    }
+}
+void solve() {
+    int n;
+    cin >> n;
+    vector<string> v;
+    int open = n;
+    int close = n;
+    string output = "";
+    sol(open, close, output, v);
+
+    for (auto it : v) {
+        cout << it << Endl;
+    }
+}
