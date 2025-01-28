@@ -1,0 +1,39 @@
+Here are three techniques to approach recursive problems effectively:
+
+
+1. IBH Method (Induction, Base Case, Hypothesis)
+This method involves three steps:
+
+Hypothesis:
+Think of a hypothesis function for the problem.
+Call the hypothesis function with a reduced input (e.g., n-1).
+
+Base Case:
+Identify the smallest valid input and write it as the base case.
+
+Induction Step:
+Consider how the hypothesis function works for the reduced input.
+Write the code to combine the smaller solutions into the current solution, completing the induction step.
+
+
+
+2. Input and Output Method:
+
+This approach requires
+
+Drawing a Choice Diagram:
+Visualize the problem by creating a recursion tree to understand all possible choices at each step.
+
+Implementation: 
+Implement the recursion based on the choice diagram, ensuring all cases are handled properly.
+
+
+3. Extended Input and Output Method:
+
+This method is used when the input and output have different data types.
+
+Drawing a Choice Diagram:
+Create a recursion tree to analyze how the input transforms into the output at each step.
+
+Implementation:
+Write the recursive code considering the transformation between input and output types.
