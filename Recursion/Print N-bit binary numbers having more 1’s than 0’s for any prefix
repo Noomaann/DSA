@@ -1,0 +1,23 @@
+void sol(int one, int zero, int n, string output) {
+    if (n == 0) {
+        cout << output << Endl;
+        return;
+    }
+    string output1 = output;
+    output1.push_back('1'); sol(one + 1, zero, n - 1, output1);
+
+    if (one > zero) {
+        string output2 = output;
+        output2.push_back('0');
+        sol(one, zero + 1, n - 1, output2);
+    }
+}
+
+void solve() {
+    int n;
+    cin >> n;
+    int one = 0;
+    int zero = 0;
+    string output = "";
+    sol(one, zero, n, output);
+}
