@@ -1,0 +1,23 @@
+bool knap(vector<int>& v, int n, int sum, vector<vector<int>> &dp) {
+        if (sum == 0) return true; 
+        if (n == 0) return false; 
+
+        if (dp[n][sum] != -1) return dp[n][sum]; 
+
+        if (v[n - 1] <= sum) {
+            return dp[n][sum] = knap(v, n - 1, sum - v[n - 1], dp) || knap(v, n - 1, sum, dp);
+        }
+        return dp[n][sum] = knap(v, n - 1, sum, dp);
+    }
+
+    bool canPartition(vector<int>& v) {
+        int n = v.size();
+        int sum = accumulate(v.begin(), v.end(), 0);
+
+        if (sum % 2 != 0) return false;
+
+        sum = sum / 2;
+        vector<vector<int>> dp(n + 1, vector<int>(sum + 1, -1));
+
+        return knap(v, n, sum, dp);
+    }
