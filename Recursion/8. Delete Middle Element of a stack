@@ -6,18 +6,26 @@ void del(stack<int>&v, int mid)
 		return;
 	}
 
-	int temp = v.top(); // induction
-	v.pop(); // induction
-	del(v, mid); // hypothesis
-	v.push(temp); // induction
+        // hypothesis
+	int temp = v.top();
+	v.pop();
+	del(v, mid);
+
+	// induction
+	v.push(temp); 
 }
 
 void print(stack<int>v)
 {
+	// base case
 	if (v.empty()) return;
+
+	//hypothesis
 	int x = v.top();
 	v.pop();
 	print(v);
+
+	//induction
 	cout << x << " ";
 }
 
