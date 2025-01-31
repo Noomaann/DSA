@@ -1,0 +1,47 @@
+const int N = 1e5 + 3;
+int dp[103][N];
+
+int knap(vector<ll>& v, int n, int sum) {
+    if (sum == 0) return 1;   // Empty subset achieves sum 0
+    if (n == 0) return 0;    // No elements left and sum is not 0
+
+    if (dp[n][sum] != -1) return dp[n][sum];
+
+    if (v[n - 1] <= sum) {
+        return dp[n][sum] = knap(v, n - 1, sum - v[n - 1]) + knap(v, n - 1, sum);
+    }
+    return dp[n][sum] = knap(v, n - 1, sum);
+}
+
+void solve() {
+    int n, sum;
+    cin >> n >> sum;
+    vector<ll> v(n);
+    for (int i = 0; i < n; i++) {
+        cin >> v[i];
+    }
+
+    //memoization
+    memset(dp, -1, sizeof(dp));
+    cout << knap(v, n, sum) << Endl;
+    return;
+
+    //iterative
+    for (int i = 0; i < n + 1; i++) {
+        for (int j = 0; j < sum + 1; j++) {
+            if (i == 0) dp[i][j] = 0; // Empty subset achieves sum 0
+            if (j == 0) dp[i][j] = 1; // No elements to achieve non-zero sum
+        }
+    }
+
+    for (int i = 1; i < n + 1; i++) {
+        for (int j = 1; j < sum + 1; j++) {
+            if (v[i - 1] <= j) {
+                dp[i][j] = (dp[i - 1][j - v[i - 1]]) + (dp[i - 1][j]);
+            }
+            else dp[i][j] = dp[i - 1][j];
+        }
+    }
+
+    cout << dp[n][sum] << endl;
+}
