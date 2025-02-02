@@ -1,0 +1,29 @@
+const int N = 1e6;
+vector<bool> prime(N + 1, true);
+vector<int> pre(N + 1, 0);
+
+void sieve() {
+    prime[0] = prime[1] = false;
+    for (int i = 2; i * i <= N; i++) {
+        if (prime[i]) {
+            for (int j = i * i; j <= N; j += i) {
+                prime[j] = false;
+            }
+        }
+    }
+}
+
+void solve() {
+    int n, q;
+    cin >> n >> q;
+
+    for (int i = 1; i <= n; i++) {
+        pre[i] = pre[i - 1] + prime[i];
+    }
+
+    while (q--) {
+        int l, r;
+        cin >> l >> r;
+        cout << pre[r] - pre[l - 1] << endl;
+    }
+}
