@@ -1,0 +1,12 @@
+vi v;
+void primefact(int n) {
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            v.pb(i);
+            while (n % i == 0) {
+                n /= i;
+            }
+        }
+    }
+    if (n != 1)v.pb(n);
+}
