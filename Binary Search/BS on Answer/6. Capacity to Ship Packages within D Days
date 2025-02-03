@@ -1,0 +1,30 @@
+class Solution {
+    bool cap(int mid, vector<int>v, int d){
+        int day = 1;
+        int load = 0;
+        for(int i=0; i<v.size(); i++){
+            if(v[i]+load > mid){
+                day++;
+                load = v[i];
+            }
+            else load += v[i];
+        }
+        return day <= d;
+    }
+public:
+    int shipWithinDays(vector<int>& v, int d) {
+        int n = v.size();
+        int low = *max_element(v.begin(),v.end());
+        int high = accumulate(v.begin(),v.end(),0LL);
+        int ans = -1;
+        while(low <= high){
+            int mid = low+(high-low)/2;
+            if(cap(mid,v,d)){
+                high = mid-1;
+                ans = mid;
+            }
+            else low = mid+1;
+        }
+        return ans;
+    }
+};
