@@ -1,0 +1,32 @@
+bool pos(int dis, vector<int>v, int cow) {
+    int cntCow = 1;
+    int last = v[0];
+    for (int i = 1; i < v.size(); i++) {
+        if (v[i] - last >= dis) {
+            cntCow++;
+            last = v[i];
+        }
+    }
+    return cntCow >= cow;
+}
+ 
+void solve() {
+    int n, k;
+    cin >> n >> k;
+    vi v(n);
+    forin(v, n)
+    srt(v);
+    int low = 1;
+    int high = *max_element(all(v)) - *min_element(all(v));
+    int ans = -1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (pos(mid, v, k)) {
+            low = mid + 1;
+            ans = mid;
+        }
+        else high = mid - 1;
+    }
+    cout << ans << Endl;
+}
+ 
