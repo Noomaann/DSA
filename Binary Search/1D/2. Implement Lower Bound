@@ -1,0 +1,7 @@
+int findFloor(vector<int>& arr, int k) {
+        if(arr[0] > k) return -1;
+        if(binary_search(arr.begin(),arr.end(),k)){
+            return lower_bound(arr.begin(),arr.end(),k)-arr.begin();
+        }
+        else return lower_bound(arr.begin(),arr.end(),k)-arr.begin()-1;
+    }
