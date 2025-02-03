@@ -1,0 +1,40 @@
+// User code template
+
+class Solution {
+  public:
+    void f(vector<int>&a, int x, vector<int>&v){
+        int ans = -1;
+        int low = 0;
+        int high = a.size()-1;
+        while(low <= high){
+            int mid = low+(high-low)/2;
+            if(a[mid] <= x){
+                ans = a[mid];
+                low = mid+1;
+            }
+            else high = mid-1;
+        }
+        v.push_back(ans);
+    }
+    void c(vector<int>&a, int x, vector<int>&v){
+        int ans = -1;
+        int low = 0;
+        int high = a.size()-1;
+        while(low <= high){
+            int mid = low+(high-low)/2;
+            if(a[mid] >= x){
+                ans = a[mid];
+                high = mid-1;
+            }
+            else low = mid+1;
+        }
+        v.push_back(ans);
+    }
+    vector<int> getFloorAndCeil(int x, vector<int> &a) {
+        vector<int> v;
+        sort(a.begin(),a.end());
+        f(a,x,v);
+        c(a,x,v);
+        return v;
+    }
+};
