@@ -1,0 +1,6 @@
+int search(vector<int>& v, int target) {
+        if(binary_search(v.begin(),v.end(),target)){
+            return lower_bound(v.begin(),v.end(),target)-v.begin();
+        }
+        else return -1;
+    }
