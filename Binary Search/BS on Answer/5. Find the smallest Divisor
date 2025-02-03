@@ -1,0 +1,25 @@
+class Solution {
+    int sol(vector<int>v, int mid){
+        int cnt = 0;
+        for(int i=0; i<v.size(); i++){
+            cnt += (v[i]+mid-1)/mid;
+        }
+        return cnt;
+    }
+public:
+    int smallestDivisor(vector<int>& v, int x) {
+        int low = 1;
+        int high = *max_element(v.begin(),v.end());
+        int ans = -1;
+        while(low <= high){
+            int mid = low+(high-low)/2;
+            if(sol(v,mid) <= x){
+                ans = mid;
+                high = mid-1;
+            }
+            else low = mid+1;
+        }
+        return ans;
+
+    }
+};
