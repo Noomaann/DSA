@@ -1,10 +1,9 @@
-
 const int N = 1e4 + 3;
 int dp[103][N];
 
 int knap(vector<ll>& v, int n, int sum) {
     if (sum == 0) return 1;
-    if (n == 0) return 0; 
+    if (n == 0) return 0;
 
     if (dp[n][sum] != -1) return dp[n][sum];
 
@@ -25,7 +24,14 @@ void solve() {
 
     //memoization
     memset(dp, -1, sizeof(dp));
-    cout << knap(v, n, sum) << Endl;
+    int mxx = 0;
+    for (int i = sum / 2; i >= 0; --i) {
+        if (knap(v, n, i)) {
+            mxx = i;
+            break;
+        }
+    }
+    cout << (sum - 2 * mxx) << endl;
 
 
     //iterative
