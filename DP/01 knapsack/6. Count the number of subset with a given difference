@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll ;
+typedef vector<int> vi;
+typedef vector<ll> vl;
+#define pan cin.tie(0);cout.tie(0);ios_base::sync_with_stdio(0);
+// define values.
+#define mod 1000000007
+#define PI 3.1415926535897932384626
+/* Bit-Stuff */
+#define get_set_bits(a) (__builtin_popcount(a))
+#define get_set_bitsll(a) ( __builtin_popcountll(a))
+#define get_trail_zero(a) (__builtin_ctz(a))
+#define get_lead_zero(a) (__builtin_clz(a))
+#define get_parity(a) (__builtin_parity(a))
+/*  Abbrevations  */
+#define ff first
+#define ss second
+#define mp make_pair
+#define pb push_back
+#define Endl "\n"
+// loops
+#define forin(arr,n) for(ll i=0;i<n;i++) cin>>arr[i];
+// sort
+#define all(V) (V).begin(),(V).end()
+#define srt(V) sort(all(V))
+#define srtGreat(V) sort(all(V),greater<ll>())
+
+#define fastio ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+
+const int N = 1e5 + 3;
+int dp[103][N];
+
+int knap(vector<ll>& v, int n, int sum) {
+    if (sum == 0) return 1;   // Empty subset achieves sum 0
+    if (n == 0) return 0;    // No elements left and sum is not 0
+
+    if (dp[n][sum] != -1) return dp[n][sum];
+
+    if (v[n - 1] <= sum) {
+        return dp[n][sum] = knap(v, n - 1, sum - v[n - 1]) + knap(v, n - 1, sum);
+    }
+    return dp[n][sum] = knap(v, n - 1, sum);
+}
+
+void solve() {
+    int n, diff;
+    cin >> n >> diff;
+    vector<ll> v(n);
+    for (int i = 0; i < n; i++) {
+        cin >> v[i];
+    }
+    ll sum = accumulate(all(v), 0LL);
+    sum = (diff + sum) / 2;
+    //memoization
+    memset(dp, -1, sizeof(dp));
+    cout << knap(v, n, sum) << Endl;
+
+    //iterative
+    for (int i = 0; i < n + 1; i++) {
+        for (int j = 0; j < sum + 1; j++) {
+            if (i == 0) dp[i][j] = 0; // Empty subset achieves sum 0
+            if (j == 0) dp[i][j] = 1; // No elements to achieve non-zero sum
+        }
+    }
+
+    for (int i = 1; i < n + 1; i++) {
+        for (int j = 1; j < sum + 1; j++) {
+            if (v[i - 1] <= j) {
+                dp[i][j] = (dp[i - 1][j - v[i - 1]]) + (dp[i - 1][j]);
+            }
+            else dp[i][j] = dp[i - 1][j];
+        }
+    }
+
+    cout << dp[n][sum] << endl;
+}
+
+
+
+int32_t main() {
+    fastio;
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+
+    int t = 1;
+    //cin >> t;
+
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
