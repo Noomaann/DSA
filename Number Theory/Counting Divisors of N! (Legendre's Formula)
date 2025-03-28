@@ -1,0 +1,17 @@
+1. DIVISORS AND PRIME FACTORIZATION: The number of positive divisors of a number can be determined from its prime factorization.
+If a number n has the prime factorization: n = (p1^a1) x (p2^a2) x...x (pk^ak)
+then the number of positive divisors of n is:  (a1+1) x (a2+1) x...x (ak+1)
+
+2. PRIME FACTORIZATION OF N!: To find the number of divisors of N!, we first need its prime factorization. The exponents of the primes in N!
+can be found using Legendre's formula, which states that the exponent of a prime p N! is: (N/p^1) + (N/p^2) + (N/p^3)...
+This sum continues until 
+p^k > N, at which point the terms become zero. 
+
+Code :
+for (int p : primes) {
+    int exponent = 0;
+    int power = p;
+    while (power <= N) {
+        exponent += N / power;  // Legendre's formula
+        power *= p;             // Next power of p
+    }
